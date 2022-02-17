@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 
 import java.awt.*;
+import java.util.List;
 
 
 public class CommandListener extends ListenerAdapter {
@@ -27,7 +28,17 @@ public class CommandListener extends ListenerAdapter {
 
                 try {
                     if(event.getSubcommandName()!=null){
-                        for(SlashSubCommand sscmd : slashCommand.slashSubCommands){
+                        List<SlashSubCommand> listOfSubcommands = null;
+                        if(event.getSubcommandGroup()!=null){
+                            for(SubCommandGroup subCommandGroup : slashCommand.subCommandGroups){
+                                if(event.getSubcommandGroup().equals(subCommandGroup.subcommandGroupData.getName())){
+                                    listOfSubcommands = subCommandGroup.subCommandList;
+                                }
+                            }
+                        }else{
+                            listOfSubcommands = slashCommand.slashSubCommands;
+                        }
+                        for(SlashSubCommand sscmd : listOfSubcommands){
                             if(sscmd.subcommandData.getName().equals(event.getSubcommandName())){
                                 sscmd.run(event);
                                 return;
