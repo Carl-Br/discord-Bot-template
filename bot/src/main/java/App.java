@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args){
         try {
             //Database.connect();
-            //start Bot.Bot
+            //start
             Bot.start();
         } catch (LoginException |InterruptedException e) {
             e.printStackTrace();

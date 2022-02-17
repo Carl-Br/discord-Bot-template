@@ -1,10 +1,14 @@
 package Bot;
 
 import commands.Test;
+import commands.TestSubcommandOne;
+import commands.TestSubcommandTwo;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.json.simple.JSONObject;
@@ -48,8 +52,11 @@ public class Bot {
         // optionally block until JDA is ready
         jda.awaitReady();
 
+        //create commands
+        Test testCommand = new Test(new CommandData("test", "this is a test command"));
+
         //add commands
-        commandList.add(new Test("test", "this is a test command"));
+        commandList.add(testCommand);
 
         //set all my Commands from the commandList
         debugGuild = jda.awaitReady().getGuildById(debugGuildId);
@@ -67,15 +74,16 @@ public class Bot {
 
         if(debug){
             for (SlashCommand slashCommand:commandList) {
-                jda.upsertCommand(slashCommand.getCommandData()).queue();
+                jda.upsertCommand(slashCommand.commandData).queue();
             }
         }
         //jda.getGuildById(guildId).updateCommands().queue();
         for (SlashCommand slashCommand:commandList) {
-            debugGuild.upsertCommand(slashCommand.getCommandData()).queue();
+            debugGuild.upsertCommand(slashCommand.commandData).queue();
         }
     }
 
+    //returns the standard embed template to use
     public static EmbedBuilder getReplyEmbed(String title, String description){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(embedColor);
@@ -91,6 +99,7 @@ public class Bot {
         return embed;
     }
 
+    //sets the variables form he config file
     public static void setupConfig(){
         JSONParser parser = new JSONParser();
         try{
@@ -104,8 +113,6 @@ public class Bot {
             e.printStackTrace();
             shutdown();
         }
-
-
     }
 
 }
