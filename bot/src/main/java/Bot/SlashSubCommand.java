@@ -27,4 +27,12 @@ public abstract class SlashSubCommand {
     public CommandPrivilege getCommandPrilvilege(){
         return commandPrivilege;
     }
+
+    public SubcommandData getSubcommandData(){
+        return  subcommandData;
+    }
+
+    public void setSubcommandData(SubcommandData  scd){
+        subcommandData = scd;
+    }
 }

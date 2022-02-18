@@ -1,5 +1,6 @@
 package Bot;
 
+import commands.Help;
 import commands.Test;
 import commands.TestSubcommandOne;
 import commands.TestSubcommandTwo;
@@ -52,11 +53,15 @@ public class Bot {
         // optionally block until JDA is ready
         jda.awaitReady();
 
+        //
         //create commands
+        //
         Test testCommand = new Test(new CommandData("test", "this is a test command"));
-
+        //
         //add commands
+        //
         commandList.add(testCommand);
+
 
         //set all my Commands from the commandList
         debugGuild = jda.awaitReady().getGuildById(debugGuildId);
@@ -72,7 +77,7 @@ public class Bot {
         //jda.updateCommands();
         debugGuild.updateCommands().queue();
 
-        if(debug){
+        if(!debug){
             for (SlashCommand slashCommand:commandList) {
                 jda.upsertCommand(slashCommand.commandData).queue();
             }

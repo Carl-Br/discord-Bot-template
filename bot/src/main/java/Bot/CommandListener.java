@@ -19,13 +19,6 @@ public class CommandListener extends ListenerAdapter {
         for (SlashCommand slashCommand : Bot.commandList) {
             if(event.getName().equals(slashCommand.commandData.getName())){
 
-                Runnable CommandRunMethode;
-
-                System.out.println(event.getName());
-                System.out.println(event.getSubcommandGroup());
-                System.out.println(event.getSubcommandName());
-
-
                 try {
                     if(event.getSubcommandName()!=null){
                         List<SlashSubCommand> listOfSubcommands = null;

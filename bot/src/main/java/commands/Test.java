@@ -41,6 +41,7 @@ public class Test extends  SlashCommand{
     }
 
     @Override
+    //this methode gets executed, when the command has no sub commands
     public void run(SlashCommandEvent event) throws Exception {
        event.replyEmbeds(Bot.getReplyEmbed("Test","This is a test command").build()).queue();
     }

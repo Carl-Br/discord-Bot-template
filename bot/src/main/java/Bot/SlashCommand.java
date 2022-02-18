@@ -16,6 +16,8 @@ public abstract class SlashCommand{
     public  SlashCommand(CommandData cd){
         commandData = cd;
     }
+
+    //this methode gets executed, when the command has no sub commands
     public abstract void run(SlashCommandEvent event) throws Exception;
 
     public void addSubCommand(SlashSubCommand ssc){
@@ -26,5 +28,13 @@ public abstract class SlashCommand{
     public void addSubCommandGroup (SubCommandGroup scg){
         commandData.addSubcommandGroups(scg.subcommandGroupData);
         subCommandGroups.add(scg);
+    }
+
+    public CommandData getCommandData(){
+        return  commandData;
+    }
+
+    public void setCommandDate(CommandData  cd){
+        commandData = cd;
     }
 }
